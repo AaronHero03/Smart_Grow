@@ -10,7 +10,8 @@ void WaterSensor::setup(){
 void WaterSensor::tick(){
     if(millis() - lastTime  >= readTime){
         lastTime = millis();
-        value = analogRead(pin);
+        int raw = analogRead(pin);
+        value = map(raw, 1023, 0, 0, 100); 
         printData();    
     }
 }
