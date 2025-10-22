@@ -35,7 +35,6 @@ void SensorDHT::printData(){
     Serial.print("C, Humidity: ");
     Serial.print(humidity);
     Serial.println("%");
-
 }
 
 float SensorDHT::getHumidity(){
