@@ -3,6 +3,7 @@
 SensorDHT::SensorDHT(int p, long rT) : pin(p), readTime(rT) {};
 
 void SensorDHT::setup(){
+    dht.setup(pin, DHTesp::DHT11);
     temperature = 0.0;
     humidity = 0.0;
     lastTime = 0;
@@ -16,7 +17,7 @@ void SensorDHT::tick(){
 
         // Check for errors
         if(dht.getStatus() != DHTesp::ERROR_NONE){
-            Serial.print("Error reading the sensor");
+            Serial.println("Error reading the sensor");
             Serial.println(dht.getStatusString());
             return;
         }

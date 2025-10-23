@@ -13,7 +13,7 @@ const int PIN_WATER  = 32;
 const int PIN_NOISE  = 33;  
 
 // ------------------ READING INTERVALS ------------------
-const long TIME_DHT    = 5000;
+const long TIME_DHT    = 3000;
 const long TIME_GAS    = 2000;
 const long TIME_SOIL   = 2000;
 const long TIME_WATER  = 2000;
@@ -44,6 +44,7 @@ void setup() {
   water.setup();
   noise.setup();
   Serial.println("Sensors ready.\n");
+
 }
 
 // ------------------ MAIN LOOP ------------------
@@ -58,7 +59,7 @@ void loop() {
   unsigned long currentMillis = millis();
   if (currentMillis - lastUartSend >= TIME_UART) {
     lastUartSend = currentMillis;
-
+    
     String data = "{";
     data += "\"temp\":" + String(dht.getTemperature()) + ",";
     data += "\"hum\":" + String(dht.getHumidity()) + ",";
@@ -67,8 +68,9 @@ void loop() {
     data += "\"water\":" + String(water.getData()) + ",";
     data += "\"noise\":" + String(noise.getData());
     data += "}";
-
+    
     SerialToPi.println(data); // UART → Raspberry Pi
-    Serial.println("UART → " + data);
+    Serial.println("UART: " + data);
   }
+    
 }
