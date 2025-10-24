@@ -2,9 +2,10 @@
 
 #include "Arduino.h"
 #include "DHTesp.h"
+#include "BaseSensor.h"
 
-class SensorDHT{
-private:
+class SensorDHT : public BaseSensor{
+protected:
     DHTesp dht;
     
     int pin;
@@ -24,5 +25,5 @@ public:
     
     float getHumidity();
     float getTemperature();
-
+    float getValue() override;
 };

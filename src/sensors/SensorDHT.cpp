@@ -1,4 +1,4 @@
-#include "SensorDHT.h"
+#include "sensors/SensorDHT.h"
 
 SensorDHT::SensorDHT(int p, long rT) : pin(p), readTime(rT) {};
 
@@ -43,5 +43,9 @@ float SensorDHT::getHumidity(){
 }
 
 float SensorDHT::getTemperature(){
+    return temperature;
+}
+
+float SensorDHT::getValue(){
     return temperature;
 }
