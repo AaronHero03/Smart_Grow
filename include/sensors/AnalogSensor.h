@@ -2,7 +2,7 @@
 #include "Arduino.h"
 #include "BaseSensor.h"
 
-class AnalogSensor : public BaseSensor {
+class AnalogSensor : public Sensor {
 protected:
     int pin;
     float rawValue;

@@ -21,7 +21,7 @@ SoilSensor  soil(PINS[2],   TIMES[2]);
 WaterSensor water(PINS[3],  TIMES[3]);
 NoiseSensor noise(PINS[4],  TIMES[4]);
 
-BaseSensor* sensors[SENSOR_COUNT] = {&dht,&gas,&soil,&water,&noise};
+Sensor* sensors[SENSOR_COUNT] = {&dht,&gas,&soil,&water,&noise};
 
 // ------------------ UART SETUP ------------------
 

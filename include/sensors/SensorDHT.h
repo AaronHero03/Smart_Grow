@@ -4,7 +4,7 @@
 #include "DHTesp.h"
 #include "BaseSensor.h"
 
-class SensorDHT : public BaseSensor{
+class SensorDHT : public Sensor{
 protected:
     DHTesp dht;
     
