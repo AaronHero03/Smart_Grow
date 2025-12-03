@@ -2,50 +2,49 @@
 
 SensorDHT::SensorDHT(int p, long rT) : pin(p), readTime(rT) {};
 
-void SensorDHT::setup(){
+void SensorDHT::setup()
+{
     dht.setup(pin, DHTesp::DHT11);
     temperature = 0.0;
     humidity = 0.0;
     lastTime = 0;
 }
 
-void SensorDHT::tick(){
-    if(millis() - lastTime  >= readTime){
+void SensorDHT::tick()
+{
+    if (millis() - lastTime >= readTime)
+    {
         lastTime = millis();
 
         TempAndHumidity data = dht.getTempAndHumidity();
 
         // Check for errors
-        if(dht.getStatus() != DHTesp::ERROR_NONE){
+        if (dht.getStatus() != DHTesp::ERROR_NONE)
+        {
             Serial.println("Error reading the sensor");
             Serial.println(dht.getStatusString());
             return;
         }
 
         // If there are not errors we save the data of the sensor
-        temperature =  data.temperature;
+        temperature = data.temperature;
         humidity = data.humidity;
-        printData();    
+        // printData();
+        Serial.println();
     }
 }
 
-void SensorDHT::printData(){
-    Serial.print("Temperature: ");
-    Serial.print(temperature);
-
-    Serial.print("C, Humidity: ");
-    Serial.print(humidity);
-    Serial.println("%");
-}
-
-float SensorDHT::getHumidity(){
+float SensorDHT::getHumidity()
+{
     return humidity;
 }
 
-float SensorDHT::getTemperature(){
+float SensorDHT::getTemperature()
+{
     return temperature;
 }
 
-float SensorDHT::getValue(){
+float SensorDHT::getValue()
+{
     return temperature;
 }

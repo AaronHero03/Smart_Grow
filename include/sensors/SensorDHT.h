@@ -2,28 +2,29 @@
 
 #include "Arduino.h"
 #include "DHTesp.h"
-#include "BaseSensor.h"
+#include "Sensor.h"
 
-class SensorDHT : public Sensor{
+class SensorDHT : public Sensor
+{
 protected:
     DHTesp dht;
-    
+
     int pin;
-    
+    long lastTime;
+    long readTime;
+
     float temperature;
     float humidity;
-
-    unsigned long lastTime;
-    long readTime;
 
 public:
     SensorDHT(int p, long rT);
 
-    void setup();
-    void tick();
-    void printData();
-    
+    void setup() override;
+    void tick() override;
+
     float getHumidity();
     float getTemperature();
+
     float getValue() override;
+    String getName() override { return "dht: "; };
 };

@@ -1,25 +1,32 @@
 #pragma once
 #include "Arduino.h"
-#include "BaseSensor.h"
+#include "Sensor.h"
 
-class AnalogSensor : public Sensor {
+class AnalogSensor : public Sensor
+{
 protected:
     int pin;
-    float rawValue;
-    float mapValue;
-    unsigned long lastTime;
+    long lastTime;
     long readInterval;
 
-    int minReading;
-    int maxReading; 
+    float rawValue;
+    float mapValue;
 
+    int minReading;
+    int maxReading;
+
+    String name;
 
 public:
-    AnalogSensor(int pin, long readTime, int minR = 0, int maxR = 4095);
-    void setup();
+    AnalogSensor(String name, int pin, long readTime, int minR = 0, int maxR = 4095);
+    void setup() override;
     void calibrate(int low, int high);
-    void tick();
+
+    void tick() override;
     float readRaw();
+
+    String getName() override;
     float getValue() override;
-    virtual void printData() = 0;
+
+    void printData();
 };
