@@ -9,6 +9,8 @@ class SensorDHT : public Sensor
 protected:
     DHTesp dht;
 
+    String name;
+
     int pin;
     long lastTime;
     long readTime;
@@ -26,5 +28,5 @@ public:
     float getTemperature();
 
     float getValue() override;
-    String getName() override { return "dht: "; };
+    String getName() override { return "dht"; };
 };

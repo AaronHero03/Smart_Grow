@@ -27,25 +27,44 @@ void ActuatorManager::tick()
 
     for (int i = 0; i < actuatorCount; i++)
     {
+
         bool prevState = actuators[i]->getState();
         String name = actuators[i]->getName();
 
         if (name == "pump")
         {
-            if (soil < t.soil_min || water < t.water_min)
-                actuators[i]->activate();
+            if (soil < t.soil_min)
+            {
+                if (water > t.water_min)
+                {
+                    Serial.println("Bomba prendida");
+                    actuators[i]->activate();
+                }
+                else
+                {
+                    Serial.println("Bomba apagada");
+                    actuators[i]->deactivate();
+                }
+            }
             else
+            {
                 actuators[i]->deactivate();
+            }
+            // Serial.println("Bomba apagada");
         }
 
         if (name == "fan")
         {
             if (temp > t.temp_max || hum < t.humidity_min)
+            {
                 actuators[i]->activate();
+            }
             else
+            {
+                // Serial.println("Ventilador apagado");
                 actuators[i]->deactivate();
+            }
         }
-
         if (actuators[i]->getState() != prevState)
             updated = true;
     }

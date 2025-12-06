@@ -18,7 +18,7 @@ protected:
     String name;
 
 public:
-    AnalogSensor(String name, int pin, long readTime, int minR = 0, int maxR = 4095);
+    AnalogSensor(String name, int pin, long readTime, int minR = 0, int maxR = 100);
     void setup() override;
     void calibrate(int low, int high);
 

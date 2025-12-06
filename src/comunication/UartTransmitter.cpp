@@ -13,6 +13,9 @@ void UartTransmitter::send(JsonDocument &doc)
     String out;
     serializeJson(doc, out);
     serial.println(out);
+
+    Serial.print("[UART - TX -> PC] Sent: ");
+    Serial.println(out);
 }
 
 bool UartTransmitter::receive(JsonDocument &doc)
@@ -25,6 +28,16 @@ bool UartTransmitter::receive(JsonDocument &doc)
     if (line.length() == 0)
         return false;
 
+    Serial.print("[UART - RX <- PC] Raw: ");
+    Serial.println(line);
+
     auto err = deserializeJson(doc, line);
-    return !err;
+    if (err)
+    {
+        Serial.println("[UART] JSON parse ERROR");
+        return false;
+    }
+
+    Serial.println("[UART] JSON parsed OK");
+    return true;
 }

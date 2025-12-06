@@ -13,8 +13,8 @@
 
 #define SEND_INTERVAL 5000
 
-const int FAN_PIN = 19;
-const int PUMP_PIN = 26;
+const int FAN_PIN = 26;
+const int PUMP_PIN = 25;
 
 #define SOIL_PIN 34
 #define WATER_PIN 35
@@ -57,8 +57,11 @@ void setup()
 
 void loop()
 {
+    int humidity = 67;
+    float temperature = 24.5;
+    int soil = 42;
+
     delay(500);
-    
     sensorManager.tick();
     actuatorManager.tick();
     uartController.tick();

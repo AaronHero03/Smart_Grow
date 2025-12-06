@@ -6,19 +6,19 @@ Actuator::Actuator(String n, int p, long blinkInterval)
 void Actuator::setup()
 {
     pinMode(pin, OUTPUT);
-    digitalWrite(pin, LOW);
+    digitalWrite(pin, HIGH);
 }
 
 void Actuator::activate()
 {
     state = true;
-    digitalWrite(pin, HIGH);
+    digitalWrite(pin, LOW);
 }
 
 void Actuator::deactivate()
 {
     state = false;
-    digitalWrite(pin, LOW);
+    digitalWrite(pin, HIGH);
 }
 
 bool Actuator::getState()
